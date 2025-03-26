@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Class-Path: ffmpeg.jar javacv.jar opencv.jar javacpp.jar flandmark.jar
+  libdc1394.jar flycapture.jar videoinput.jar libfreenect.jar libfreen
+ ect2.jar librealsense.jar artoolkitplus.jar ffmpeg-platform.jar javac
+ v-platform.jar opencv-platform.jar ffmpeg-linux-x86.jar opencv-linux-
+ x86.jar ffmpeg-android-arm.jar ffmpeg-android-x86.jar ffmpeg-linux-ar
+ mhf.jar ffmpeg-windows-x86.jar flandmark-platform.jar libdc1394-platf
+ orm.jar opencv-android-arm.jar opencv-android-x86.jar opencv-linux-ar
+ mhf.jar opencv-windows-x86.jar ffmpeg-linux-x86_64.jar flandmark-linu
+ x-x86.jar flycapture-platform.jar libdc1394-linux-x86.jar opencv-linu
+ x-x86_64.jar videoinput-platform.jar ffmpeg-linux-ppc64le.jar ffmpeg-
+ macosx-x86_64.jar flycapture-linux-x86.jar libfreenect-platform.jar o
+ pencv-linux-ppc64le.jar opencv-macosx-x86_64.jar ffmpeg-windows-x86_6
+ 4.jar flandmark-android-arm.jar flandmark-android-x86.jar flandmark-l
+ inux-armhf.jar flandmark-windows-x86.jar libdc1394-linux-armhf.jar li
+ bdc1394-windows-x86.jar libfreenect-linux-x86.jar libfreenect2-platfo
+ rm.jar librealsense-platform.jar opencv-windows-x86_64.jar artoolkitp
+ lus-platform.jar flandmark-linux-x86_64.jar flycapture-linux-armhf.ja
+ r flycapture-windows-x86.jar libdc1394-linux-x86_64.jar libfreenect2-
+ linux-x86.jar librealsense-linux-x86.jar videoinput-windows-x86.jar a
+ rtoolkitplus-linux-x86.jar flandmark-linux-ppc64le.jar flandmark-maco
+ sx-x86_64.jar flycapture-linux-x86_64.jar libdc1394-linux-ppc64le.jar
+  libdc1394-macosx-x86_64.jar libfreenect-linux-armhf.jar libfreenect-
+ windows-x86.jar flandmark-windows-x86_64.jar libdc1394-windows-x86_64
+ .jar libfreenect-linux-x86_64.jar artoolkitplus-android-arm.jar artoo
+ lkitplus-android-x86.jar artoolkitplus-linux-armhf.jar artoolkitplus-
+ windows-x86.jar flycapture-windows-x86_64.jar libfreenect-linux-ppc64
+ le.jar libfreenect-macosx-x86_64.jar libfreenect2-linux-x86_64.jar li
+ brealsense-linux-x86_64.jar videoinput-windows-x86_64.jar artoolkitpl
+ us-linux-x86_64.jar libfreenect-windows-x86_64.jar artoolkitplus-linu
+ x-ppc64le.jar artoolkitplus-macosx-x86_64.jar artoolkitplus-windows-x
+ 86_64.jar libtensorflow-1.2.1.jar
+Main-Class: ij.ImageJ
+

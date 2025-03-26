@@ -1,0 +1,106 @@
+20160921	和田宝成@CDB
+20160923	一部旧バージョンの表記があったため削除。Measure項目Label表示について追記。
+20160217	ソート処理改善のため1000poits制限を5000pointsに変更。
+20160301	前および次のZまたはTのROIをコピーする機能を追加。
+			ROIの外形を書き込んだRGB画像を作る機能を追加。
+
+CellDetection_.jar
+
+ImageJのプラグイン。
+対応するバージョン: java 1.8仕様のImageJ(おそらくjava 1.6では動かない) -> https://imagej.nih.gov/ij/download.html
+インストール: plugin ディレクトリに当jarファイルをコピーし、ImageJを起動する。
+
+
+作成動機 : Segment Measureを使用するにあたり、ROIの自動認識も必要と考えました。
+
+クリックしたポイントを起点に細胞輪郭(設定輝度値)を認識してRoiをとり、Overlay(CZT毎)に登録していくpluginです。
+
+Roiはポリゴンタイプですので各頂点を移動させることが可能です。
+自動で検出できる輪郭と、目で見た輪郭にROIが合っていない場合などに動かします。
+この作業は画像を拡大することで動かしやすいと思います。
+
+
+添付画像においては下記設定をおすすめ値として提示しておきますが、適当にいじってみてください。
+このような綺麗な輪郭が取れるものは他の自動認識pluginでも可能なものですが、もう少しコントラストの弱い画像においてもそれなりに発揮できるとおもいます。
+
+
+使用上のコツ: あくまで私感ですので参考程度にどうぞ。
+	バックグラウンドがあっても問題ないが、人間の目に見やすくするためできるだけ除いたほうがよい。
+	ノイズに関しても認識させたい境界と同等以上のものがあるとそれを検出してしまう可能性があるため、できるだけ除いたほうが良い。
+	Intensity Limitの値は認識させたい境界の輝度を参考にして若干低めを設定すると良い感じがする。
+	切れ切れの境界が多い場合はRadiusの値を大きくする。
+	
+
+制限事項
+	頂点を検出した際に並び替えを行っているが、点数が多くなると時間がかかりすぎるため5000pointsの制限をかけている。
+	すなわち、画像として大きいものや自動検出により点数が増えてしまう画像には使用できない。
+
+Intensity Limit : 階調により異なる値
+	境界部分として認識させる輝度値
+	デフォルト値は最大輝度値の0.25倍（例:8bit画像 255/4 = 63.75）
+
+Count Limit : 1
+	境界値を認識させる数
+	上記limit値がここで設定した数値以上検出されると境界として認識する
+
+Radius : 2
+	注目pixelからの半径(例 1 : 3x3 pixe)の矩形を想定
+	この想定された矩形内で上記のLimit値が検出されるかを判定する
+	すなわち、この値が大きいと多少の隙間も無視できるが、輪郭が甘くなる
+
+Expansion : 1
+	検出したROIを膨張させる値(pixel)
+	基本的に細胞輪郭の内側を認識するので、より拡張させたい場合に使用する
+	0を入力した際は膨張処理をしないため歪な形状においても検出できる可能性がある
+	*1以上を入力することで膨張させるが、取得したROIの形によってはエラーが出ることがあるため
+
+Roughness : 2
+	検出した頂点を減衰する値(何個飛ばしで採用するか)
+	1をいれて全て用いるより2もしくは3あたりで減衰しておいたほうが手動作業時に楽かつ綺麗にできる
+
+StrokeWidth : 0
+	ROIの線の幅
+
+StrokeColor : White
+	ROIの線の色
+
+AutoDetect(radiobutton) : checked
+	自動検出をおこなうときに選択
+	*現在、自動検出に用いるmethodoはMyMethodのみ
+	
+Manual(radiobutton)
+	手作業でのROIを書くこときに選択
+	polygon selectionsやFreehand selectionsも可
+	
+Edit(radiobutton)
+	登録されたROIの各頂点を変更するときに選択
+
+Overlay(checkbox) : checked
+	overlayに登録するか否か
+	check:登録する
+	
+Spline(checkbox) : checked
+	ポリゴンタイプのRoiをつなぐ線をSplineとするか否か
+	check:spline化
+
+AutoForward-T(checkbox) : unchecked
+	ROIが登録される毎にT軸を1進める機能
+	check:進む
+
+Copy ROIs
+	Comboboxにより選択されたROIを現在の画像にコピーする
+
+Load TSV
+	SaveTSVより保存されたtsvファイルを読み込む
+
+Save TSV
+	Overlayへ登録したROI情報をtsvファイルとして保存する
+	独自フォーマットだが単純なtsvファイルのため、テキストエディタやエクセル等で開くことができる
+
+Make Image
+	ROIの外形をStrokColorで設定された色で書き込んだRGB画像を作る
+
+Measure
+	Overlayへ登録したROIを計測する
+	計測項目はAnalyze/Set Measurements　のcheck項目に依存する
+	*SetMeasurements欄内のDisplay Labelにcheckを入れることで、計測に用いたROIのstack位置とROI#が表示される
